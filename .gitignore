@@ -1,0 +1,13 @@
+# remove pycache# Ignore Python compiled files
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore __pycache__ directories in all subdirectories
+**/__pycache__/
+
+tb_logs/**
+
+dataset/raw/content/raw/**
+utils/dataset/raw/content/raw/**
+images/**

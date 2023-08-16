@@ -1,0 +1,45 @@
+output_dir: 'runs/save/3-swinbase'
+log_dir: 'runs/logs/3-swinbase'
+device: 'cuda:0'
+seed: 42
+dataset:
+  name: 'youtu'
+  root: '/home/air/Spoof/Implementation-patchnet'
+  augmentation:
+    rand_crop_size: 200
+    rand_hori_flip: 0.5
+    rand_rotation: 20
+  train_set: 'files/train.csv'
+  # train_set: 'modified_csv_file.csv'
+  val_set: 'files/val.csv'
+  # val_set: 'nuaa_images.csv'
+  mean: [0.5070, 0.4764, 0.4551]
+  sigma: [0.2480, 0.2468, 0.2416]
+
+model:
+  base: 'swin_base'
+  pretrained: True
+  image_size: [256, 256]
+
+train:
+  batch_size: 256
+  optimizer: 'adam'
+  lr: 0.002
+  num_epochs: 200
+
+  lr: 0.001
+  lr_decay: 0.95
+  momentum: 0.9
+  weight_decay: 0.005
+  data_weight: 0.01
+  inter_weight: 0.01
+  intra_weight: 0.01
+  n_prototypes: 6
+  n_features: 512
+  inter_delta: 0.258
+  intra_delta: 0.966
+  scale: 2
+  margin: 0.25
+
+val:
+  batch_size: 256
