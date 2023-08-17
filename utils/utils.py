@@ -1,6 +1,6 @@
 import yaml
 import torch.distributed as dist
-from models.resnet18 import FeatureExtractor
+from models.vit import FeatureExtractor
 from torch import optim
 import torch
 

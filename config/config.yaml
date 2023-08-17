@@ -6,7 +6,7 @@ dataset:
   name: 'youtu'
   root: '/home/air/Spoof/Implementation-patchnet'
   augmentation:
-    rand_crop_size: 200
+    rand_crop_size: 224
     rand_hori_flip: 0.5
     rand_rotation: 20
   train_set: 'files/train.csv'
@@ -22,15 +22,15 @@ model:
   image_size: [256, 256]
 
 train:
-  batch_size: 256
+  batch_size: 32
   optimizer: 'adam'
   lr: 0.002
-  num_epochs: 200
+  num_epochs: 50
 
   lr: 0.001
   lr_decay: 0.95
   momentum: 0.9
-  weight_decay: 0.005
+  weight_decay: 0.0005
   data_weight: 0.01
   inter_weight: 0.01
   intra_weight: 0.01
@@ -42,4 +42,4 @@ train:
   margin: 0.25
 
 val:
-  batch_size: 256
+  batch_size: 32
