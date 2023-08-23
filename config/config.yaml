@@ -20,9 +20,11 @@ model:
   base: 'swin_base'
   pretrained: True
   image_size: [256, 256]
+  out_feat : 512
+  name : 'new_augmented_resenet18'
 
 train:
-  batch_size: 32
+  batch_size: 128
   optimizer: 'adam'
   lr: 0.002
   num_epochs: 50
@@ -42,4 +44,4 @@ train:
   margin: 0.25
 
 val:
-  batch_size: 32
+  batch_size: 128

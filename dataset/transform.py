@@ -20,18 +20,19 @@ from PIL import Image
 from Load_FAS_MultiModal_DropModal import Spoofing_train, Normaliztion, ToTensor, RandomHorizontalFlip, Cutout
 
 # Load an example image
-img = Image.open('/home/air/Spoof/Implementation-patchnet/images/LCC_FASD/LCC_FASD_development/spoof/FT720P_G780_REDMI4X_id0_s0_15.png')
+img = Image.open('/home/air/Spoof/patch_light/images/client/rgb/adaptation/1/real/2_G_NT_5s_g_E_2_1/0.jpg')
 
 # Define the transforms
 transform = transforms.Compose([
     transforms.Resize(cfg['model']['image_size']),
-    transforms.GaussianBlur(kernel_size=20, sigma=(0.1, 2.0)),
-    # transforms.RandomCrop(cfg['dataset']['augmentation']['rand_crop_size']),
-    # transforms.RandomHorizontalFlip(
-    #     cfg['dataset']['augmentation']['rand_hori_flip']),
-    # transforms.RandomRotation(cfg['dataset']['augmentation']['rand_rotation']),
+    # transforms.GaussianBlur(kernel_size=20, sigma=(0.1, 2.0)),
+    transforms.RandomCrop(cfg['dataset']['augmentation']['rand_crop_size']),
+    transforms.RandomHorizontalFlip(
+        cfg['dataset']['augmentation']['rand_hori_flip']),
+    transforms.RandomRotation(20),
+    transforms.CenterCrop(cfg['dataset']['augmentation']['rand_crop_size']),
     transforms.ToTensor(),
-    transforms.Normalize(cfg['dataset']['mean'], cfg['dataset']['sigma'])
+    # transforms.Normalize(cfg['dataset']['mean'], cfg['dataset']['sigma'])
 ])
 
 # Apply the transforms to the image

@@ -6,6 +6,8 @@ import numpy as np
 from PIL import Image
 from torchvision import transforms
 import glob
+from utils.utils import apply_lf_filters
+from utils.utils import apply_hf_filters
 
 class FASDataset(Dataset):
 
@@ -32,6 +34,9 @@ class FASDataset(Dataset):
         if self.transform:
             img1 = self.transform(img)
             img2 = self.transform(img)
+            img1=apply_lf_filters(img1)
+            img2=apply_hf_filters(img2)
+            
 
         return img1, img2, label
 

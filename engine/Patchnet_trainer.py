@@ -45,8 +45,8 @@ class PatchModel(LightningModule):
         x1, x2, dist = batch
         x1, x2 = self.forward(x1, x2)
         loss = self.loss(x1, x2, dist)
-        score1 = F.softmax(self.loss1.arc_loss.s * self.loss1.arc_loss.fc(x1.squeeze()), dim=1)
-        score2 = F.softmax(self.loss1.arc_loss.s * self.loss1.arc_loss.fc(x2.squeeze()), dim=1)
+        score1 = F.softmax(self.loss.amsm_loss.s * self.loss.amsm_loss.fc(x1.squeeze()), dim=1)
+        score2 = F.softmax(self.loss.amsm_loss.s * self.loss.amsm_loss.fc(x2.squeeze()), dim=1)
         acc1 = self.calc_acc(score1, dist.squeeze().type(torch.int32))
         acc2 = self.calc_acc(score2, dist.squeeze().type(torch.int32))
         accuracy = (acc1 + acc2) / 2

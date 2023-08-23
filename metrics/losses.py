@@ -3,6 +3,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 import math
 
+from utils.utils import read_cfg
+cfg = read_cfg(cfg_file='config/config.yaml')
+
 class SimilarityLoss(nn.Module):
     def __init__(self):
         super(SimilarityLoss, self).__init__()
@@ -95,7 +98,7 @@ class PatchLoss(nn.Module):
         self.alpha1 = alpha1
         self.alpha2 = alpha2
         self.sim_loss = SimilarityLoss()
-        self.amsm_loss = AdMSoftmaxLoss(1000,2)
+        self.amsm_loss = AdMSoftmaxLoss(cfg['model']['out_feat'],2)
         self.s= s
         self.m_l = m_l
         self.m_s = m_s
@@ -200,7 +203,7 @@ class PatchLoss1(nn.Module):
         self.alpha1 = alpha1
         self.alpha2 = alpha2
         self.sim_loss = SimilarityLoss()
-        self.arc_loss = ArcFaceLoss(1000,2)
+        self.arc_loss = ArcFaceLoss(cfg['model']['out_feat'],2)
         self.s= s
         self.m_l = m_l
         self.m_s = m_s

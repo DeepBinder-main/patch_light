@@ -18,7 +18,7 @@ import numpy as np
 from torchvision import transforms, datasets
 from dataset.FAS_dataset import FASDataset
 from torch.optim.lr_scheduler import StepLR
-from metrics.losses import PatchLoss
+from metrics.losses import PatchLoss, PatchLoss1
 
 
 ROOT = os.getcwd()
@@ -52,6 +52,7 @@ network.to(device)
 optimizer = get_optimizer(cfg, network)
 lr_scheduler = StepLR(optimizer=optimizer, step_size=90, gamma=0.5)
 criterion = PatchLoss().to(device=device)
+criterion1 = PatchLoss1().to(device=device)
 
 
 # Without Resize transform, images are of different sizes and it causes an error
@@ -105,9 +106,9 @@ from lightning.pytorch.loggers import TensorBoardLogger
 from engine.Patchnet_trainer import PatchModel
 import lightning as L
 
-model = PatchModel(cfg=cfg, network=network, optimizer=optimizer, loss=criterion, lr_scheduler=lr_scheduler)
+model = PatchModel(cfg=cfg, network=network, optimizer=optimizer, loss=criterion,loss1=criterion1, lr_scheduler=lr_scheduler)
 
-logger = TensorBoardLogger("tb_logs", name="my_model")
+logger = TensorBoardLogger("tb_logs", name=cfg['model']['name'])
 
 from lightning.pytorch.callbacks import ModelCheckpoint
 
